@@ -1,6 +1,7 @@
 from cmath import nan
 import Scraping_25 as sc
 import Rain_Management_14 as rm
+import Send_Alert_for_Slack_01 as sa
 
 #Execution sc
 #道路降雨状況のサイトにアクセスし、スクレイピングを実行
@@ -24,3 +25,12 @@ df2 = rm.EditDataframe(list_length, df_dict)
 output_file = "G:/マイドライブ/KAGAWA_Rain/KAGAWA_Rain.xlsx"
 rm.OutputExcel(df2, output_file)
 rm.AdjustExcel(output_file)
+
+#Execution sa
+#警報を発信
+alert_flug, rain_max = sa.AlertCheck(df2)
+
+if alert_flug:
+    sa.SendMessage(rain_max)
+else:
+    pass
