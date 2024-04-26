@@ -42,7 +42,7 @@ def EditDataframe(list_length, df_dict):
         out_index.append(df_dict[i].iloc[3,0] + df_dict[i].iloc[4,0])
     #Array
     df2_array = np.array(())
-    get_data_list = np.array([6,7,11,12,24,25,29,30])
+    get_data_list = np.array([6,7,11,12,16,17,23,24])
     for i in range(list_length):
         data_arr = np.array(())
         n = 0
@@ -80,7 +80,7 @@ def AdjustExcel(output_file):
     my_sheet = my_wb.worksheets[0]
     #Add Spot Name Column
     my_sheet.insert_rows(1)
-    spot_name = ["香川A", "香川B", "香川C", "香川D"]
+    spot_name = ["東かがわ", "高松", "観音寺", "財田"]
     col_name = ["B", "D", "F", "H"]
     for i, j in zip(col_name, spot_name):
         my_sheet[i + "1"] = j

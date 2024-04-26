@@ -26,7 +26,7 @@ def Scraping(url, parser):
 def FilePath(direct_name, file_type):
     dt_now = datetime.datetime.now()
     file_time = dt_now.strftime("%m%d%H%M")
-    return direct_name + "nakamura_rain_" + file_time + file_type
+    return direct_name + "KAGAWA_rain_" + file_time + file_type
 
 #Split and Output
 def Output(texts, file_path):
