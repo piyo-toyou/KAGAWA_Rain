@@ -28,7 +28,7 @@ rm.AdjustExcel(output_file)
 
 #Execution sa
 #警報を発信
-alert_flug, rain_max = sa.AlertCheck(df2)
+alert_flug, rain_max = sa.AlertCheck(df2, Alert_1st=20)
 
 if alert_flug:
     sa.SendMessage(rain_max)

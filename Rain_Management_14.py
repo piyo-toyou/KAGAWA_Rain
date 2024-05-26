@@ -80,7 +80,7 @@ def AdjustExcel(output_file):
     my_sheet = my_wb.worksheets[0]
     #Add Spot Name Column
     my_sheet.insert_rows(1)
-    spot_name = ["東かがわ", "高松", "観音寺", "財田"]
+    spot_name = ["引田", "上天神", "豊浜", "猪ノ鼻TN"]
     col_name = ["B", "D", "F", "H"]
     for i, j in zip(col_name, spot_name):
         my_sheet[i + "1"] = j

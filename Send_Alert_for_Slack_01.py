@@ -11,7 +11,7 @@ import numpy as np
 import slackweb as sw
 
 # メッセージを送るかどうかのチェック
-def AlertCheck(df):
+def AlertCheck(df, Alert_1st=170, Alert_2nd=200, Alert_final=250):
   last1_array = np.squeeze(df.iloc[0:1].values)
   last2_array = np.squeeze(df.iloc[1:2].values)
 
@@ -22,14 +22,14 @@ def AlertCheck(df):
   last1_max_index = last1_array_slice.argmax()
   last2_max = last2_array_slice[last1_max_index]
 
-  if last1_max < 170: #最終計測雨量 < 170mm---->>何もしない
+  if last1_max < Alert_1st: #最終計測雨量 < 170mm---->>何もしない
       return False, None
-  elif 170 <= last1_max < 200 and last2_max < 170: #最終前計測雨量 < 170mm　かつ　最終計測雨量 < 200mm---->>170mm警報
-      return True, 170
-  elif 200 <= last1_max < 250 and last2_max < 200: #最終前計測雨量 < 200mm　かつ　最終計測雨量 < 250mm---->>200mm警報
-      return True, 200
-  elif 250 <= last1_max and last2_max < 250:
-      return True, 250
+  elif Alert_1st <= last1_max < Alert_2nd and last2_max < Alert_1st: #最終前計測雨量 < 170mm　かつ　最終計測雨量 < 200mm---->>170mm警報
+      return True, Alert_1st
+  elif Alert_2nd <= last1_max < Alert_final and last2_max < Alert_2nd: #最終前計測雨量 < 200mm　かつ　最終計測雨量 < 250mm---->>200mm警報
+      return True, Alert_2nd
+  elif Alert_final <= last1_max and last2_max < Alert_final:
+      return True, Alert_final
   else:
       return False, None
 
@@ -40,9 +40,9 @@ def SendMessage(n):
     <参考雨量サイト>https://www.skr.mlit.go.jp/road/mobile/M0712_37.html"
 
   # メッセージの送信
-  ### 小倉畑DM slack = sw.Slack(url="https://hooks.slack.com/services/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")
+  ### 令和6年度香川管内防災点検PJ
+  slack = sw.Slack(url="https://hooks.slack.com/services/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")
   ### 新宮DM slack = sw.Slack(url="https://hooks.slack.com/services/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")
-  #令和6年度香川管内防災点検PJ
-  slack = sw.Slack(url="https://hooks.slack.com/services/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")
+  # slack = sw.Slack(url="https://hooks.slack.com/services/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")
   slack.notify(text=alert_message.format(n))
 
